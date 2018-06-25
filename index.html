@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>COMP397 Mid-Term</title>
+    <script src="/lib/easeljs-0.7.1.min.js"></script>
+    <script src="/lib/preloadjs-0.4.1.min.js"></script>
+</head>
+
+<body onload="init()">
+
+<canvas id="canvas" width="1000" height="800" style="border: black solid 1px"></canvas>
+
+</body>
+
+<script>
+    var stage,dice1, dice2,startbutton, startoverbutton;
+    function init() 
+    {
+        console.log("App Started...");
+        stage = new createjs.Stage(document.getElementById('canvas'));
+        createjs.Ticker.addEventListener("tick", handleTick);
+        createjs.Ticker.setFPS(60);
+        start();
+    }
+
+    function handleTick(e) 
+    {
+        stage.update();
+    }
+    function start() 
+    {
+        console.log("Creating Images...");
+        dice1 = new Image();
+        dice1.addEventListener('load', drawdice1);
+        dice1.src = '/images/blank.png';
+
+        dice2 = new Image();
+        dice2.addEventListener('load', drawdice2);
+        dice2.src = '/images/blank.png';
+
+        startbutton = new Image();
+        startbutton.addEventListener('load', createstartbutton);
+        startbutton.src = '/images/StartButton.png';
+
+    }
+
+    function drawdice1(e) {
+        console.log("Dice 1 add...");
+        var img = new createjs.Bitmap(dice1);
+        img.x = 100;
+        img.y = 100;
+        stage.addChild(img);
+        stage.update();
+    }
+    function drawdice2(e) {
+        console.log("Dice 2 add...");
+        var img = new createjs.Bitmap(dice2);
+        img.x = 400;
+        img.y = 100;
+        stage.addChild(img);
+        stage.update();
+    }
+
+    function createstartbutton(e) {
+        console.log("Start button add...");
+        var img = new createjs.Bitmap(startbutton);
+        img.x = 275;
+        img.y = 400;
+        img.addEventListener('click', roll);
+        stage.addChild(img);
+        stage.update();
+    }
+
+    function roll(e)
+    {
+            console.log("Roll Started...");
+
+            stage.removeAllChildren();
+            drawdice1();
+            drawdice2();
+            createstartbutton();
+
+            var dice1_num = Math.floor((Math.random() * 6) + 1);
+
+            switch(dice1_num)
+            {
+                case 1:
+                dice1.src = '/images/1.png';
+                drawdice1();
+                break;
+                case 2:
+                dice1.src = '/images/2.png';
+                drawdice1();
+                break;
+                case 3:
+                dice1.src = '/images/3.png';
+                drawdice1();
+                break;
+                case 4:
+                dice1.src = '/images/4.png';
+                drawdice1();
+                break;
+                case 5:
+                dice1.src = '/images/5.png';
+                drawdice1();
+                break;
+                case 6:
+                dice1.src = '/images/6.png';
+                drawdice1();
+                break;
+                default:
+                dice1.src = '/images/blank.png';
+                drawdice1();
+            };
+
+            var dice2_num = Math.floor((Math.random() * 6) + 1);
+            switch(dice2_num)
+            {
+                case 1:
+                dice2.src = '/images/1.png';
+                drawdice1();
+                break;
+                case 2:
+                dice2.src = '/images/2.png';
+                drawdice1();
+                break;
+                case 3:
+                dice2.src = '/images/3.png';
+                drawdice1();
+                break;
+                case 4:
+                dice2.src = '/images/4.png';
+                drawdice1();
+                break;
+                case 5:
+                dice2.src = '/images/5.png';
+                drawdice1();
+                break;
+                case 6:
+                dice2.src = '/images/6.png';
+                drawdice1();
+                break;
+                default:
+                dice2.src = '/images/blank.png';
+                drawdice1();
+            };
+            
+            console.log("Text added...");
+            var text1 = new createjs.Text(dice1_num, "50px Arial", "#00000" );
+            text1.x = 200;
+            text1.y = 300;
+            var text2 = new createjs.Text(dice2_num, "50px Arial", "#00000" );
+            text2.x = 450;
+            text2.y = 300;
+            stage.addChild(text1,text2);
+            stage.update();
+
+
+
+    }
+</script>
+</html>
